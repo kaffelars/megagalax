@@ -10,6 +10,8 @@ No optimizations, this is just simple brute force. But it works decently, althou
 
 Be warned: This is not a scientifically accurate tool, it's just a toy!
 
+## Example pics
+
 ![galaxy collision](https://github.com/kaffelars/megagalax/blob/main/pics/system2.png?raw=true)
 ![peaceful galaxy](https://github.com/kaffelars/megagalax/blob/main/pics/system3.png?raw=true)
 ![simple system](https://github.com/kaffelars/megagalax/blob/main/pics/system1.gif?raw=true)
