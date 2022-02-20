@@ -8,7 +8,7 @@ Each particle has a position, velocity and mass. Then for each frame gravity is 
 
 No optimizations, this is just simple brute force. But it works decently, although fps will quickly dip at higher particle counts.
 
-Be warned: This is not a scientifically accurate tool, it's just a toy!
+Be warned: This is not a scientifically accurate tool, it's just a toy! Place particles and play around with all the different settings to get neat results.
 
 ## Example pics
 
@@ -27,15 +27,20 @@ When you start, you can either start with an empty system, or load one of the pr
 
 All controls are found in the left side panel (only visible when simulation is paused).
 
-You can add single particles (normal or supermassive) or add many particles using the sphere generator.
-
-Simply click the button in the left side panel, then change parameters such as start position, velocity, mass, or radius/mass distribution/flatness/rotation/etc. (sphere generator).
+You can add single particles (normal or supermassive) or add many particles using the sphere generator. Simply click one of the "add" buttons in the left side panel, then change parameters such as start position, velocity, mass, or radius/mass distribution/flatness/rotation/etc. (sphere generator). All the units are arbitrary.
 
 Then click "Apply" to add the particles to the simulation.
 
 Also in the left panel, you can change particle shader and shader parameters, as well as simulation parameters such as gravity and "slowdown" (how much particles move for each frame).
 
-All units are arbitrary.
+You can also change simulation type and parameters:
+* gravity - the strength of gravity
+* slowdown - how far particles move for each frame
+* three different simulation shaders:
+  - "simple" - particles only interact though gravity - highest fps
+  - "interact" - two particles that come close share some of their velocity and/or mass with each other. Higher levels of velocity/mass transfer or higher interaction distance may produce odd results (e.g. overlapping particles, mass "explosions", etc.).
+  - "merge" - two particles that come close will merge into one larger particle - change merge distance to increase/reduce the chance of a merge.
+
 
 For each frame, particles are downloaded from the gpu, sorted on the cpu (back to front), then uploaded again to render (not optimal). This can be disabled.
 
