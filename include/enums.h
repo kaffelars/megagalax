@@ -27,7 +27,7 @@ enum class boxtype
 
 enum class setting_enum
 {
-    screen_x, screen_y, fov, vsync, uiscale, mousesens, simulateinbg, cameramode, invert_y, movespeed
+    screen_x, screen_y, fov, vsync, uiscale, mousesens, simulateinbg, cameramode, invert_y, movespeed, shaderworkgroups
 };
 
 enum class key_type
