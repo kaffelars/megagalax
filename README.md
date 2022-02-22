@@ -29,7 +29,7 @@ All controls are found in the left side panel (only visible when simulation is p
 
 You can add single particles (normal or supermassive) or add many particles using the sphere generator. Simply click one of the "add" buttons in the left side panel, then change parameters such as start position, velocity, mass, or radius/mass distribution/flatness/rotation/etc. (sphere generator). All the units are arbitrary.
 
-Then click "Apply" to add the particles to the simulation.
+Then click "Apply" to add the particles to the simulation. To start (or stop) the simulation press "p".
 
 Also in the left panel, you can change particle shader and shader parameters, as well as simulation parameters such as gravity and "slowdown" (how much particles move for each frame).
 
