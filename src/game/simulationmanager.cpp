@@ -2,6 +2,7 @@
 #include "simulationmanager.h"
 #include "shadercontroller.h"
 
+#include "settings.h"
 #include "systemmanager.h"
 
 namespace simulationmanager
@@ -99,6 +100,8 @@ void simulationmanager::simulate()
             shadercontroller::activateshader(shaderids::compute_gravity_merge);break;
         }
 
+        workgroups = (systemmanager::get_currentparticlenumber()/settings::getisetting(setting_enum::shaderworkgroups))+1;
+
         shadercontroller::sendcomputeshaderuniforms(shaderids::compute_gravity);
         glDispatchCompute(workgroups, 1, 1);
         glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
@@ -109,6 +112,7 @@ void simulationmanager::simulate()
             glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
         }
 
+        workgroups = (systemmanager::get_currentparticlenumber()/settings::getisetting(setting_enum::shaderworkgroups))+1;
 
         //move particles
         switch(simmode)
