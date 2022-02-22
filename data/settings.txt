@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<settings>
+	<screenx type="0" value="1920" />
+	<screeny type="0" value="1147" />
+	<fov type="0" value="90" />
+	<vsync type="0" value="1" />
+	<uiscale type="1" value="20" />
+	<mousesens type="1" value="300" />
+	<simulateinbg type="0" value="1" />
+	<cameramode type="0" value="0" />
+	<invert_y type="0" value="0" />
+	<movespeed type="0" value="75" />
+</settings>

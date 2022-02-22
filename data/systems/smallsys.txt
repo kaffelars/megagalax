@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<info name="Small system" description="A small and cute example" version="56" particles="4" />
+<simulation gravity="500" slowdown="75" mode="0" />
+<particledata>
+	<particle posx="1.01721728" posy="0" posz="1.52590108" mass="730976" velx="-3.34197044" vely="0" velz="4.42483091" rer="0" />
+	<particle posx="-1.18778849" posy="0" posz="-1.49312747" mass="730976" velx="3.31750822" vely="0" velz="-4.41136265" rer="0" />
+	<particle posx="-1.87482631" posy="0" posz="-8.32658672" mass="571.609985" velx="14.9190779" vely="0" velz="-4.19514084" rer="0" />
+	<particle posx="-13.7346611" posy="0" posz="-0.411008269" mass="660" velx="-2.87540984" vely="0" velz="-11.2777252" rer="0" />
+</particledata>
