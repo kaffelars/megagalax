@@ -24,7 +24,6 @@ void main(void)
 
     float gconst = gravity;
 
-
     for (int a = 0; a < particlenumber; a++)
     {
         if (a != totid)
