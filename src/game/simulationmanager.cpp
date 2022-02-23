@@ -100,7 +100,7 @@ void simulationmanager::simulate()
             shadercontroller::activateshader(shaderids::compute_gravity_merge);break;
         }
 
-        workgroups = (systemmanager::get_currentparticlenumber()/settings::getisetting(setting_enum::shaderworkgroups))+1;
+        workgroups = std::ceil(((float)systemmanager::get_currentparticlenumber()/(float)settings::getisetting(setting_enum::shaderworkgroups)));
 
         shadercontroller::sendcomputeshaderuniforms(shaderids::compute_gravity);
         glDispatchCompute(workgroups, 1, 1);
@@ -112,7 +112,7 @@ void simulationmanager::simulate()
             glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
         }
 
-        workgroups = (systemmanager::get_currentparticlenumber()/settings::getisetting(setting_enum::shaderworkgroups))+1;
+        workgroups = std::ceil(((float)systemmanager::get_currentparticlenumber()/(float)settings::getisetting(setting_enum::shaderworkgroups)));
 
         //move particles
         switch(simmode)

@@ -1,6 +1,7 @@
 #include "consts.h"
 #include "shader.h"
 #include "messagelogger.h"
+#include "utils.h"
 
 shader::shader(std::string filename, std::vector<std::string> uniformnames, shadertype styp)
 {
@@ -80,6 +81,10 @@ bool shader::loadshaderprogram(std::string shado, GLenum shadertype)
     buffer << filu.rdbuf();
 
     std::string shaderinnhold = buffer.str();
+
+    std::string maxparticles = std::to_string(c_maxparticles);
+
+    utils::replaceAll(shaderinnhold, "<c_maxparticles>", maxparticles);
 
     char* src = const_cast<char*>(shaderinnhold.c_str());
     int32_t strsize = shaderinnhold.length();

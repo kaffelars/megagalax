@@ -10,5 +10,4 @@
 	<cameramode type="0" value="0" />
 	<invert_y type="0" value="0" />
 	<movespeed type="0" value="75" />
-	<shaderworkgroups type="0" value="512" />
 </settings>

@@ -39,4 +39,25 @@ namespace utils
     {
         return packu2f(uva*255, uvb*255, texid);
     }
+
+    void replaceAll(std::string& source, const std::string& from, const std::string& to)
+    {
+        //https://stackoverflow.com/questions/2896600/how-to-replace-all-occurrences-of-a-character-in-string
+        std::string newString;
+        newString.reserve(source.length());
+
+        std::string::size_type lastPos = 0;
+        std::string::size_type findPos;
+
+        while(std::string::npos != (findPos = source.find(from, lastPos)))
+        {
+            newString.append(source, lastPos, findPos - lastPos);
+            newString += to;
+            lastPos = findPos + from.length();
+        }
+
+        newString.append(source, lastPos, source.length() - lastPos);
+
+        source.swap(newString);
+    }
 }

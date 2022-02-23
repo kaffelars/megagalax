@@ -2,17 +2,17 @@
 
 layout(std140, binding = 0) buffer ptpos
 {
-    vec4 pos[50000];
+    vec4 pos[<c_maxparticles>];
 };
 
 layout(std140, binding = 1) buffer ptvel
 {
-    vec4 vel[50000];
+    vec4 vel[<c_maxparticles>];
 };
 
 layout(std140, binding = 2) buffer tempvel
 {
-    vec4 tvel[50000];
+    vec4 tvel[<c_maxparticles>];
 };
 
 uniform float slowdown;
