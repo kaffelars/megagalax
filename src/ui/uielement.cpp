@@ -149,18 +149,18 @@ bool uielement::button(std::string text, glm::vec2 pos, glm::vec2 buttonsize, bo
     return button(text, buttonsize, disabled);
 }
 
-void uielement::checkbox(std::string text, bool &checked)
+bool uielement::checkbox(std::string text, bool &checked)
 {
-    ImGui::Checkbox(text.c_str(), &checked);
+    return ImGui::Checkbox(text.c_str(), &checked);
 }
 
-void uielement::checkbox(bool &checked, glm::vec2 position)
+bool uielement::checkbox(bool &checked, glm::vec2 position)
 {
     setposition(position.x, position.y);
 
     std::string flepsi = "##c" + counterstr();
 
-    ImGui::Checkbox(flepsi.c_str(), &checked);
+    return ImGui::Checkbox(flepsi.c_str(), &checked);
 }
 
 void uielement::addrect(glm::vec2 rectstart, glm::vec2 rectend, glm::vec3 col)

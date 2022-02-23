@@ -82,8 +82,7 @@ void scenesettings::video()
 {
     uielement::text("Ui scale (1 = smallest, 50 = largest): ");
     int uiscaletemp = settings::getuiscale();
-    uielement::sliderint(1, 50, uiscaletemp, 1);
-    if (uiscaletemp != (int)settings::getuiscale())
+    if (uielement::sliderint(1, 50, uiscaletemp, 1))
     {
         settings::setsetting(setting_enum::uiscale, (float)uiscaletemp);
         uicontroller::newuiscale();
@@ -92,8 +91,7 @@ void scenesettings::video()
     uielement::spacing();
 
     bool vsync = settings::getisetting(setting_enum::vsync);
-    uielement::checkbox("Vsync (in-game)", vsync);
-    if (vsync!=settings::getisetting(setting_enum::vsync))
+    if (uielement::checkbox("Vsync (in-game)", vsync))
     {
         settings::setsetting(setting_enum::vsync, vsync);
         windowmanager::setvsync(vsync);
@@ -103,8 +101,7 @@ void scenesettings::video()
 
     uielement::text("Camera field of view (vertical): ");
     int fov = settings::getisetting(setting_enum::fov);
-    uielement::sliderint(30, 180, fov, 1);
-    if (fov!=settings::getisetting(setting_enum::fov))
+    if (uielement::sliderint(30, 180, fov, 1));
     {
         settings::setsetting(setting_enum::fov, fov);
         cameracontroller::updateprojection();
@@ -115,8 +112,7 @@ void scenesettings::video()
     float mousesens = settings::getfsetting(setting_enum::mousesens);
     uielement::text("Camera movement sensitivity (10 = highest, 1000 = lowest): ");
     int mtemp = mousesens;
-    uielement::sliderint(10, 1000, mtemp, 1);
-    if (mtemp != (int)mousesens)
+    if (uielement::sliderint(10, 1000, mtemp, 1))
     {
         settings::setsetting(setting_enum::mousesens, (float)mtemp);
         uicontroller::newuiscale();
@@ -126,25 +122,21 @@ void scenesettings::video()
 
     int movespeed = settings::getisetting(setting_enum::movespeed);
     uielement::text("Camera movement speed");
-    int movetemp = movespeed;
-    uielement::sliderint(1, 1000, movetemp, 1);
-    if (movetemp != movespeed)
+    if (uielement::sliderint(1, 1000, movespeed, 1))
     {
-        settings::setsetting(setting_enum::movespeed, movetemp);
+        settings::setsetting(setting_enum::movespeed, movespeed);
     }
 
     uielement::spacing();
 
     bool simbg = settings::getisetting(setting_enum::simulateinbg);
-    uielement::checkbox("Simulate while window doesn't have focus", simbg);
-    if (simbg!=settings::getisetting(setting_enum::simulateinbg))
+    if (uielement::checkbox("Simulate while window doesn't have focus", simbg))
     {
         settings::setsetting(setting_enum::simulateinbg, simbg);
     }
 
     bool cammode = settings::getisetting(setting_enum::cameramode);
-    uielement::checkbox("Free look camera", cammode);
-    if (cammode!=settings::getisetting(setting_enum::cameramode))
+    if (uielement::checkbox("Free look camera", cammode))
     {
         settings::setsetting(setting_enum::cameramode, cammode);
         cameracontroller::setfreelook(cammode);
@@ -155,6 +147,14 @@ void scenesettings::video()
     if (invert_y!=settings::getisetting(setting_enum::invert_y))
     {
         settings::setsetting(setting_enum::invert_y, invert_y);
+    }
+
+    uielement::spacing();
+    uielement::text("Simulate every n rendered frames: ");
+    int simeveryn = settings::getisetting(setting_enum::simulateeveryn);
+    if (uielement::sliderint(1, 100, simeveryn, 1))
+    {
+        settings::setsetting(setting_enum::simulateeveryn, simeveryn);
     }
 }
 

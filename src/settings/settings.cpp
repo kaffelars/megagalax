@@ -25,6 +25,8 @@ void settings::loadsettings()
     setts.emplace_back(setting("invert_y", 0, 1));
     setts.emplace_back(setting("movespeed", 0, 100));
     setts.emplace_back(setting("shaderworkgroups", 0, 512));
+    setts.emplace_back(setting("simulateeveryn", 0, 1));
+
 
     pugi::xml_document doc;
 

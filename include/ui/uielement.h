@@ -61,8 +61,8 @@ namespace uielement
 
     void addrect(glm::vec2 start, glm::vec2 rectsize, glm::vec3 col);
 
-    void checkbox(bool &checked, glm::vec2 position);
-    void checkbox(std::string text, bool &checked);
+    bool checkbox(bool &checked, glm::vec2 position);
+    bool checkbox(std::string text, bool &checked);
 }
 
 #endif // UIELEMENT_H

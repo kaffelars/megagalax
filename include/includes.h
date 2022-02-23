@@ -13,6 +13,8 @@
 #include <string>
 #include <random>
 
+#include <iostream>
+
 #include <variant>
 #include <fstream>
 #include <sstream> //for string stream

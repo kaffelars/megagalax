@@ -9,6 +9,8 @@ namespace simulationmanager
     void unpause_simulation();
     bool is_simulation_paused();
 
+    bool timetosimulate();
+
     void simulate();
     void initialize();
     int getcurrentgravity();

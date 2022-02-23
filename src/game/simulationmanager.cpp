@@ -4,11 +4,13 @@
 
 #include "settings.h"
 #include "systemmanager.h"
+#include "timekeeper.h"
 
 namespace simulationmanager
 {
     bool simulation_paused = true;
     int workgroups = 512;//setting?
+    int simframe = 0;
 }
 
 bool simulationmanager::is_simulation_paused()
@@ -80,9 +82,25 @@ void simulationmanager::toggle_pause_simulation()
         pause_simulation();
 }
 
+
+bool simulationmanager::timetosimulate()
+{
+    simframe ++;
+    if (simframe >= settings::getisetting(setting_enum::simulateeveryn))
+    {
+        simframe = 0;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+
 void simulationmanager::simulate()
 {
-    if (!simulation_paused)
+    if (!simulation_paused && timetosimulate())
     {
         int simmode = shadercontroller::getcomputeshaderdata(shaderids::compute_gravity)->getvalue(4);
 
