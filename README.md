@@ -42,11 +42,10 @@ You can also change simulation type and parameters:
   - "merge" - two particles that come close will merge into one larger particle - change merge distance to increase/reduce the chance of a merge.
 
 
-For each frame, particles are downloaded from the gpu, sorted on the cpu (back to front), then uploaded again to render (not optimal). This can be disabled.
+For each frame, particles are downloaded from the gpu, sorted on the cpu (back to front), then uploaded again to render (not optimal). This can be disabled in the left side panel. You can also enable/disable showing particle velocities before you apply them, as well as a horizontal grid in the same place.
 
-You can enable or disable in-game vsync in the settings. Simulation rate is locked to rendering frame rate, so this will also affect simulation speed (but not simulation result). Disable vsync to run the simulation at max speed.
+You can enable or disable in-game vsync in the settings. Simulation rate is locked to rendering frame rate, so this will also affect simulation speed (but not simulation result). Disable in-game vsync to run the simulation at max speed. You can also reduce simulation rate by making the simulation only progress every n rendered frames.
 
-You can also enable/disable showing particle velocities before you apply them, as well as a horizontal grid.
 
 ### Hotkeys
 
