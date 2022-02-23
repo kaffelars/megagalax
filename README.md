@@ -44,6 +44,8 @@ You can also change simulation type and parameters:
 
 For each frame, particles are downloaded from the gpu, sorted on the cpu (back to front), then uploaded again to render (not optimal). This can be disabled.
 
+You can enable or disable in-game vsync in the settings. Simulation rate is locked to rendering frame rate, so this will also affect simulation speed (but not simulation result). Disable vsync to run the simulation at max speed.
+
 You can also enable/disable showing particle velocities before you apply them, as well as a horizontal grid.
 
 ### Hotkeys
