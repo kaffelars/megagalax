@@ -24,6 +24,7 @@ void scenesettings::initialize()
 void scenesettings::show()
 {
     inputmanager::clearallkeyfunctions();
+    inputmanager::setkeyfunction(key_enum::escape, [&](){scenec::goback();}, key_event::clicked);
     windowmanager::setvsync(true);
 }
 

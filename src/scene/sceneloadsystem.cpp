@@ -22,6 +22,8 @@ void sceneloadsystem::show()
 {
     systemsinfomanager::load_systems_info();
     windowmanager::setvsync(true);
+    inputmanager::clearallkeyfunctions();
+    inputmanager::setkeyfunction(key_enum::escape, [&](){scenec::goback();}, key_event::clicked);
 }
 
 void sceneloadsystem::hide()
