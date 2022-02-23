@@ -2,7 +2,7 @@
 
 Simple gravity particle simulation. Simulate anything from simple solar systems to complex galaxy collisions.
 
-A compiled version (x64 windows) in the builds folder.
+A compiled version (x64 windows (mingw-w64)) in the builds folder.
 
 Each particle has a position, velocity and mass. Then for each frame gravity is calculated (gpu compute shader) between each particle and every other particle, imparting new velocities for each particle.
 
