@@ -13,6 +13,8 @@ namespace utils
     float packrgb(glm::vec3 rgb);
 
     float getpackednorm(glm::vec3 p1,glm::vec3 p2,glm::vec3 p3);
+
+    void replaceAll(std::string& source, const std::string& from, const std::string& to);
 }
 
 
