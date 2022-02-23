@@ -18,6 +18,7 @@ namespace windowmanager
     void close();
 
     void setvsync(bool on);
+    void setvsync();
 
     void reinitialize();
 

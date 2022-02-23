@@ -21,6 +21,7 @@ void sceneloadsystem::initialize()
 void sceneloadsystem::show()
 {
     systemsinfomanager::load_systems_info();
+    windowmanager::setvsync(true);
 }
 
 void sceneloadsystem::hide()

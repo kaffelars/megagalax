@@ -24,6 +24,7 @@ void scenesettings::initialize()
 void scenesettings::show()
 {
     inputmanager::clearallkeyfunctions();
+    windowmanager::setvsync(true);
 }
 
 void scenesettings::hide()
@@ -90,7 +91,7 @@ void scenesettings::video()
     uielement::spacing();
 
     bool vsync = settings::getisetting(setting_enum::vsync);
-    uielement::checkbox("Vsync", vsync);
+    uielement::checkbox("Vsync (in-game)", vsync);
     if (vsync!=settings::getisetting(setting_enum::vsync))
     {
         settings::setsetting(setting_enum::vsync, vsync);
@@ -123,7 +124,7 @@ void scenesettings::video()
     uielement::spacing();
 
     int movespeed = settings::getisetting(setting_enum::movespeed);
-    uielement::text("Camera movement speed: ");
+    uielement::text("Camera movement speed");
     int movetemp = movespeed;
     uielement::sliderint(1, 1000, movetemp, 1);
     if (movetemp != movespeed)
@@ -134,14 +135,14 @@ void scenesettings::video()
     uielement::spacing();
 
     bool simbg = settings::getisetting(setting_enum::simulateinbg);
-    uielement::checkbox("Simulate while window doesn't have focus: ", simbg);
+    uielement::checkbox("Simulate while window doesn't have focus", simbg);
     if (simbg!=settings::getisetting(setting_enum::simulateinbg))
     {
         settings::setsetting(setting_enum::simulateinbg, simbg);
     }
 
     bool cammode = settings::getisetting(setting_enum::cameramode);
-    uielement::checkbox("Free look camera: ", cammode);
+    uielement::checkbox("Free look camera", cammode);
     if (cammode!=settings::getisetting(setting_enum::cameramode))
     {
         settings::setsetting(setting_enum::cameramode, cammode);
@@ -149,7 +150,7 @@ void scenesettings::video()
     }
 
     bool invert_y = settings::getisetting(setting_enum::invert_y);
-    uielement::checkbox("Invert y-axis when in free look camera: ", invert_y);
+    uielement::checkbox("Invert y-axis when in free look camera", invert_y);
     if (invert_y!=settings::getisetting(setting_enum::invert_y))
     {
         settings::setsetting(setting_enum::invert_y, invert_y);

@@ -54,6 +54,8 @@ void scenegame::show()
     inputmanager::setkeyfunction(key_enum::toggle_pause, [&](){togglepause();}, key_event::clicked);
 
     inputmanager::setkeyfunction(key_enum::toggle_camera, [&](){cameracontroller::togglecameramode();}, key_event::clicked);
+
+    windowmanager::setvsync();
 }
 
 void scenegame::togglepause()

@@ -29,7 +29,7 @@ bool windowmanager::setupgamewindow()
         return false;
     }
 
-    windowmanager::sdlwindow = SDL_CreateWindow("dummy", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, settings::getisetting(setting_enum::screen_x), settings::getisetting(setting_enum::screen_y), SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+    windowmanager::sdlwindow = SDL_CreateWindow("megagalax", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, settings::getisetting(setting_enum::screen_x), settings::getisetting(setting_enum::screen_y), SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
 
     if (!windowmanager::sdlwindow )
     {
@@ -63,9 +63,7 @@ bool windowmanager::setupopengl()
     }
 
 
-    //SDL_GL_SetSwapInterval(1);//vsync
-
-    setvsync(settings::getisetting(setting_enum::vsync));
+    setvsync();
 
     // Init GLEW
     glewExperimental = GL_TRUE;
@@ -132,6 +130,11 @@ void windowmanager::resizewindow(int sx, int sy)
 void windowmanager::setvsync(bool on)
 {
     SDL_GL_SetSwapInterval(on);
+}
+
+void windowmanager::setvsync()
+{
+    SDL_GL_SetSwapInterval(settings::getisetting(setting_enum::vsync));
 }
 
 void windowmanager::processevent(SDL_Event& e)

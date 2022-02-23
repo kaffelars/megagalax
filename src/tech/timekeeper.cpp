@@ -61,9 +61,9 @@ void timekeeper::timekeeping()
         fps = frames * (1000.0f/duration);
         tid[0] = std::chrono::high_resolution_clock::now();
         frames = 0;
-        std::stringstream tittel;
+        //std::stringstream tittel;
 
-        tittel << "fps: " << fps;
-        SDL_SetWindowTitle(windowmanager::sdlwindow, tittel.str().c_str());
+        //tittel << "fps: " << fps;
+        //SDL_SetWindowTitle(windowmanager::sdlwindow, tittel.str().c_str());
     }
 }

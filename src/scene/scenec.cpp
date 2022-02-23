@@ -5,8 +5,8 @@ namespace scenec
     void addscene(sceneids id, std::unique_ptr<scene> sceneptr);
     bool quit = false;
 
-    sceneids activescene {sceneids::mainmenu};
-    sceneids previousscene {sceneids::mainmenu};
+    sceneids activescene {sceneids::blank};
+    sceneids previousscene {sceneids::blank};
     std::unordered_map<uint32_t, std::unique_ptr<scene>> scenes;
 }
 
@@ -32,10 +32,10 @@ void scenec::addscene(sceneids sceneid, std::unique_ptr<scene> sceneptr)
 
 void scenec::changeactivescene(sceneids changeto)
 {
-    if (changeto != activescene)
+    if (changeto != activescene && changeto != sceneids::blank)
     {
         previousscene = activescene;
-        getactivescene().hide();
+        if (activescene != sceneids::blank) getactivescene().hide();
         activescene = changeto;
         getactivescene().show();
     }
@@ -43,7 +43,8 @@ void scenec::changeactivescene(sceneids changeto)
 
 void scenec::goback()
 {
-    changeactivescene(previousscene);
+    if (previousscene != sceneids::blank)
+        changeactivescene(previousscene);
 }
 
 scene& scenec::getactivescene()

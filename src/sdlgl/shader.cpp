@@ -2,6 +2,7 @@
 #include "shader.h"
 #include "messagelogger.h"
 #include "utils.h"
+#include "settings.h"
 
 shader::shader(std::string filename, std::vector<std::string> uniformnames, shadertype styp)
 {
@@ -83,8 +84,10 @@ bool shader::loadshaderprogram(std::string shado, GLenum shadertype)
     std::string shaderinnhold = buffer.str();
 
     std::string maxparticles = std::to_string(c_maxparticles);
+    std::string shaderworkgroups = std::to_string(settings::getisetting(setting_enum::shaderworkgroups));
 
     utils::replaceAll(shaderinnhold, "<c_maxparticles>", maxparticles);
+    utils::replaceAll(shaderinnhold, "<shaderworkgroups>", shaderworkgroups);
 
     char* src = const_cast<char*>(shaderinnhold.c_str());
     int32_t strsize = shaderinnhold.length();

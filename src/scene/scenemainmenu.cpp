@@ -21,6 +21,7 @@ void scenemainmenu::initialize()
 void scenemainmenu::show()
 {
     inputmanager::clearallkeyfunctions();
+    windowmanager::setvsync(true);
 }
 
 void scenemainmenu::hide()
@@ -34,7 +35,7 @@ void scenemainmenu::render()
     uielement::beginwindow("mainmenuwindow", glm::vec2(uielement::getcenterx(30.0f), 0.0f), glm::vec2(30.0f, 0.0f));
 
     uicontroller::changefont(uicontroller::FONT_LARGE);
-    uielement::centertext("Megaplanetos", 1.5f, 30.0f);
+    uielement::centertext("- megagalax -", 4.5f, 30.0f);
 
     uicontroller::changefont(uicontroller::FONT_NORMAL);
 
