@@ -6,7 +6,6 @@ namespace timekeeper
     std::chrono::high_resolution_clock::time_point tid[3];
 
     float deltatime; //frame time in ms
-    float totdeltatime;
     int frames;
     int fps;
 }
@@ -14,7 +13,6 @@ namespace timekeeper
 void timekeeper::initialize()
 {
     deltatime = 16.0f;
-    totdeltatime = 0.0f;
     frames = 1;
     fps = 0;
     tid[0] = std::chrono::high_resolution_clock::now();
@@ -49,7 +47,6 @@ void timekeeper::timekeeping()
     //deltatime
     tid[2] = std::chrono::high_resolution_clock::now();
     deltatime = std::chrono::duration_cast<std::chrono::milliseconds>(tid[2] - tid[1]).count();
-    totdeltatime += deltatime;
 
     frames++;
 
@@ -60,7 +57,6 @@ void timekeeper::timekeeping()
     {
         fps = frames * (1000.0f/duration);
         tid[0] = std::chrono::high_resolution_clock::now();
-        frames = 1;
-        totdeltatime = deltatime;
+        frames = 0;
     }
 }
