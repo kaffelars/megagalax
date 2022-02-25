@@ -58,7 +58,7 @@ You can enable or disable in-game vsync in the settings. Simulation rate is lock
 
 ## Using
 * [SDL2](https://www.libsdl.org/)
-* OpenGL
+* [glew](http://glew.sourceforge.net/)
 * [GLM](https://github.com/g-truc/glm)
 * [Dear ImGui](https://github.com/ocornut/imgui)
 * [pugixml](https://pugixml.org/)
