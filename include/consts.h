@@ -8,7 +8,7 @@
 #include "includes.h"
 
 const int c_maxparticles = 98304; //asset(c_maxparticles % workgroups == 0)
-const int program_version = 56; //update if it breaks loading old version systems
+const int program_version = 57; //update if it breaks loading old version systems
 const std::string systemsavefolder = "./data/systems/";
 const std::string datasavefolder = "./data/";
 

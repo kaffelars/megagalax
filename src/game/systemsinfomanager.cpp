@@ -2,6 +2,7 @@
 #include "systemsinfomanager.h"
 
 #include "pugixml.hpp"
+#include "utils.h"
 
 namespace systemsinfomanager
 {
@@ -21,8 +22,10 @@ void systemsinfomanager::load_systems_info()
     systems_info.clear();
 
     dpdf = opendir(systemsavefolder.c_str());
-    if (dpdf != NULL){
-        while (epdf = readdir(dpdf)){
+    if (dpdf != NULL)
+    {
+        while ((epdf = readdir(dpdf)))
+        {
             system_info s;
             s.filename = epdf->d_name;
             if (s.filename != "" && s.filename != "." && s.filename != "..")
@@ -42,6 +45,7 @@ void systemsinfomanager::load_systems_info()
             s.name = doc.child("info").attribute("name").value();
             s.description = doc.child("info").attribute("description").value();
             s.particlenumber = doc.child("info").attribute("particles").as_int();
+            s.version = utils::get_programversionstring(doc.child("info").attribute("version").as_int());
         }
         else
         {

@@ -237,7 +237,7 @@ void inputmanager::pausekeyfunctionsexcept(std::vector<key_enum> exceptionkeys)
     {
         exceptionkeysids.push_back(keyenumtokeymap[static_cast<uint32_t>(k)]);
     }
-    for (int a = 0; a < keymap.size(); a++)
+    for (uint32_t a = 0; a < keymap.size(); a++)
     {
         if (std::find(exceptionkeysids.begin(), exceptionkeysids.end(), a) == exceptionkeysids.end())
         {
@@ -296,7 +296,7 @@ void inputmanager::initialize()
 
     addkey(key_type::keyboard, key_enum::toggle_camera, SDL_SCANCODE_C, mod_none, "toggle camera");
 
-    for (int a =0 ; a < keymap.size(); a++)
+    for (uint32_t a =0 ; a < keymap.size(); a++)
         keypaused.push_back(false);
 }
 

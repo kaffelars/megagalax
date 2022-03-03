@@ -1,5 +1,6 @@
 #include "consts.h"
 #include "settings.h"
+#include "messagelogger.h"
 
 namespace settings
 {
@@ -32,18 +33,24 @@ void settings::loadsettings()
 
     std::string fname = datasavefolder+"settings.txt";
     pugi::xml_parse_result result = doc.load_file(fname.c_str());
-
-    pugi::xml_node settingsdata = doc.child("settings");
-
-    for (setting& s: setts)
+    if (result)
     {
-        if (pugi::xml_node specificsetting = settingsdata.child(s.identifier.c_str()))
+        pugi::xml_node settingsdata = doc.child("settings");
+
+        for (setting& s: setts)
         {
-            if (s.type == 0)
-                s.value = specificsetting.attribute("value").as_int();
-            if (s.type == 1)
-                s.value = specificsetting.attribute("value").as_float();
+            if (pugi::xml_node specificsetting = settingsdata.child(s.identifier.c_str()))
+            {
+                if (s.type == 0)
+                    s.value = specificsetting.attribute("value").as_int();
+                if (s.type == 1)
+                    s.value = specificsetting.attribute("value").as_float();
+            }
         }
+    }
+    else
+    {
+        messagelogger::logmessage("settings", "settings.txt problem: " + std::string(result.description()), warningseverity::severe);
     }
 }
 

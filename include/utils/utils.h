@@ -14,6 +14,9 @@ namespace utils
 
     float getpackednorm(glm::vec3 p1,glm::vec3 p2,glm::vec3 p3);
 
+    std::string get_programversionstring();
+    std::string get_programversionstring(int programversion);
+
     void replaceAll(std::string& source, const std::string& from, const std::string& to);
 }
 

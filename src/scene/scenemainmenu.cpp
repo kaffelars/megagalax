@@ -2,6 +2,7 @@
 #include "scenemainmenu.h"
 #include "inputmanager.h"
 #include "settings.h"
+#include "utils.h"
 
 scenemainmenu::scenemainmenu()
 {
@@ -46,7 +47,7 @@ void scenemainmenu::render()
     uielement::button("Info", glm::vec2(centerx, 25.0f), glm::vec2(15.0f, 2.5f), true);
     if (uielement::button("Quit", glm::vec2(centerx, 37.5f), glm::vec2(15.0f, 2.5f))) scenec::quitgame();
 
-    uielement::centertext("Program version: " + std::to_string(program_version), -3.0f, 30.0f);
+    uielement::centertext("Program version: " + utils::get_programversionstring(), -3.0f, 30.0f);
     uielement::centertext("github.com/kaffelars/megagalax", -2.0f, 30.0f);
 
     uielement::endwindow();

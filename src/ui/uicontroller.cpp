@@ -11,8 +11,6 @@ namespace uicontroller
     {
         ImGuiIO* io = nullptr;
         ImFont* font[2] = {nullptr, nullptr};//
-
-        bool windowbegun = false;
         glm::vec2 curwindowsize = glm::vec2(0.0f);
     }
 }

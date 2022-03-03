@@ -46,13 +46,18 @@ namespace inputmanager
 
     struct keydata
     {
+        std::string keyname;
+        std::string keydescription; //eks "forward", "cancel" osv.
+        key_type ktype {key_type::keyboard};
+
+        keydata(std::string name, std::string description, key_type ktyp) : keyname(name), keydescription(description), ktype(ktyp)
+        {
+
+        }
+
         bool held {false};
         bool clicked {false};
         int value {0};//for eks scroll
-        key_type ktype {key_type::keyboard};
-
-        std::string keydescription; //eks "forward", "cancel" osv.
-        std::string keyname;
 
         std::function<void()> keyfunction[3];//funker ikke for mus/scroll
 
@@ -65,11 +70,6 @@ namespace inputmanager
         {
             for (int a = 0; a < 3; a++)
                 keyfunction[a] = nullptr;
-        }
-
-        keydata(std::string name, std::string description, key_type ktyp) : keyname(name), keydescription(description), ktype(ktyp)
-        {
-
         }
     };
 

@@ -9,6 +9,7 @@ namespace systemsinfomanager
         std::string name;
         std::string filename;
         std::string description;
+        std::string version;
         int particlenumber;
     };
 

@@ -40,6 +40,16 @@ namespace utils
         return packu2f(uva*255, uvb*255, texid);
     }
 
+    std::string get_programversionstring()
+    {
+        return get_programversionstring(program_version);
+    }
+
+    std::string get_programversionstring(int programversion)
+    {
+        return "1." + std::to_string(programversion);
+    }
+
     void replaceAll(std::string& source, const std::string& from, const std::string& to)
     {
         //https://stackoverflow.com/questions/2896600/how-to-replace-all-occurrences-of-a-character-in-string

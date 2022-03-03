@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "simulationmanager.h"
 #include "pugixml.hpp"
+#include "messagelogger.h"
 
 namespace systemmanager
 {
@@ -56,7 +57,7 @@ namespace systemmanager
 uint64_t systemmanager::get_totalmass()
 {
     uint64_t totmass = 0;
-    for (int a = 0; a < currentparticlenumber; a++)
+    for (uint32_t a = 0; a < currentparticlenumber; a++)
     {
         totmass += obj_posmasses[a].a;
     }
@@ -71,7 +72,7 @@ void systemmanager::mergeparticles()
 
 
     //this may cause total mass to change a tiny bit due to float rounding fun
-    for (int a = 0; a < currentparticlenumber; a++)
+    for (uint32_t a = 0; a < currentparticlenumber; a++)
     {
         int m = std::round(obj_velocities[a].a);
         if (m >= 0.0f) //merging time
@@ -126,12 +127,13 @@ void systemmanager::unpause()
     storesystem(1);
 }
 
-bool systemmanager::systemstored(int fp)
+bool systemmanager::systemstored(uint32_t fp)
 {
     if (fp < storagepoints.size())
     {
         return storagepoints[fp].has_data();
     }
+    return false;
 }
 
 int systemmanager::getstoragepointnumber()
@@ -139,7 +141,7 @@ int systemmanager::getstoragepointnumber()
     return storagepoints.size();
 }
 
-void systemmanager::storesystem(int fp) //-1 = new storage point
+void systemmanager::storesystem(int32_t fp) //-1 = new storage point
 {
     if (fp == -1)
     {
@@ -147,13 +149,13 @@ void systemmanager::storesystem(int fp) //-1 = new storage point
         fp = storagepoints.size() - 1;
     }
 
-    if (fp < storagepoints.size())
+    if ((uint32_t)fp < storagepoints.size())
     {
         storagepoints[fp].obj_posmasses.clear();
         storagepoints[fp].obj_velocities.clear();
         storagepoints[fp].particlegroups.clear();
 
-        for (int a = 0; a < currentparticlenumber; a++)
+        for (uint32_t a = 0; a < currentparticlenumber; a++)
         {
             storagepoints[fp].obj_posmasses.push_back(obj_posmasses[a]);
             storagepoints[fp].obj_velocities.push_back(obj_velocities[a]);
@@ -166,7 +168,7 @@ void systemmanager::storesystem(int fp) //-1 = new storage point
     }
 }
 
-void systemmanager::deletestoragepoint(int fp)
+void systemmanager::deletestoragepoint(uint32_t fp)
 {
     if (fp > 1 && fp < storagepoints.size())
     {
@@ -174,9 +176,9 @@ void systemmanager::deletestoragepoint(int fp)
     }
 }
 
-void systemmanager::revertsystem(int fp)
+void systemmanager::revertsystem(uint32_t fp)
 {
-    if (fp >= 0 && fp < storagepoints.size())
+    if (fp < storagepoints.size())
     {
         if (storagepoints[fp].has_data())
         {
@@ -324,9 +326,8 @@ void systemmanager::clear_system()
 
 void systemmanager::deleteeverynparticles(int n)
 {
-    int deleted = 0;
     std::vector<uint32_t> particlestodelete;
-    for (int a = 0; a < currentparticlenumber; a++)
+    for (uint32_t a = 0; a < currentparticlenumber; a++)
     {
         if (a%n == 0)
         {
@@ -342,9 +343,9 @@ void systemmanager::deleteeverynparticles(int n)
     deleteemptyparticlegroups();
 }
 
-void systemmanager::deleteparticle(int id)
+void systemmanager::deleteparticle(uint32_t id)
 {
-    for (int a = id; a < currentparticlenumber-1; a++)
+    for (uint32_t a = id; a < currentparticlenumber-1; a++)
     {
         obj_posmasses[a] = obj_posmasses[a + 1];
         obj_velocities[a] = obj_velocities[a + 1];
@@ -386,7 +387,7 @@ void systemmanager::deleteparticlegroup(uint32_t id)
 {
     uint32_t particlestodelete = particlegroups[id].finalparticle - particlegroups[id].firstparticle;
 
-    for (int a = particlegroups[id].firstparticle; a < currentparticlenumber-particlestodelete; a++)
+    for (uint32_t a = particlegroups[id].firstparticle; a < currentparticlenumber-particlestodelete; a++)
     {
         obj_posmasses[a] = obj_posmasses[a + particlestodelete];
         obj_velocities[a] = obj_velocities[a + particlestodelete];
@@ -428,7 +429,7 @@ void systemmanager::sortparticles(glm::vec3 campos)
     //sorts all particles back to front relative to campos - only for rendering
     tempvector.clear();
 
-    for (int a = 0; a < currentparticlenumber; a++)
+    for (uint32_t a = 0; a < currentparticlenumber; a++)
     {
         glm::vec3 temp_objpos = glm::vec3(obj_posmasses[a].x, obj_posmasses[a].y, obj_posmasses[a].z);
         tempvector.push_back(glm::vec2(glm::length(temp_objpos-campos), a));
@@ -476,7 +477,7 @@ void systemmanager::addparticles(std::string source, std::vector<glm::vec4>& pos
     p.name = source;
     p.firstparticle = currentparticlenumber;
 
-    for (int a = 0; a < posmasses.size(); a++)
+    for (uint32_t a = 0; a < posmasses.size(); a++)
     {
         systemmanager::addparticle(posmasses[a], velocities[a]);
     }
@@ -541,18 +542,18 @@ bool systemmanager::save_system(std::string name, std::string description, std::
 
     pugi::xml_node particles = doc.append_child("particledata");
 
-    for (int a = 0; a < currentparticlenumber; a++)
+    for (uint32_t a = 0; a < currentparticlenumber; a++)
     {
-        pugi::xml_node pnode = particles.append_child("particle");
-        pnode.append_attribute("posx") = obj_posmasses[a].x;
-        pnode.append_attribute("posy") = obj_posmasses[a].y;
-        pnode.append_attribute("posz") = obj_posmasses[a].z;
-        pnode.append_attribute("mass") = obj_posmasses[a].a;
+        pugi::xml_node pnode = particles.append_child("p");
+        pnode.append_attribute("x") = obj_posmasses[a].x;
+        pnode.append_attribute("y") = obj_posmasses[a].y;
+        pnode.append_attribute("z") = obj_posmasses[a].z;
+        pnode.append_attribute("m") = obj_posmasses[a].a;
 
-        pnode.append_attribute("velx") = obj_velocities[a].x;
-        pnode.append_attribute("vely") = obj_velocities[a].y;
-        pnode.append_attribute("velz") = obj_velocities[a].z;
-        pnode.append_attribute("rer") = obj_velocities[a].a;
+        pnode.append_attribute("vx") = obj_velocities[a].x;
+        pnode.append_attribute("vy") = obj_velocities[a].y;
+        pnode.append_attribute("vz") = obj_velocities[a].z;
+        pnode.append_attribute("n") = obj_velocities[a].a;
     }
 
     std::string file = systemsavefolder+filename+".txt";
@@ -567,43 +568,72 @@ bool systemmanager::load_system(std::string filename)
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(fullfilename.c_str());
 
-    current_name = doc.child("info").attribute("name").value();
-    current_desc = doc.child("info").attribute("description").value();
-    currentparticlenumber = doc.child("info").attribute("particles").as_int();
-
-    simulationmanager::setcurrentgravity(doc.child("simulation").attribute("gravity").as_int());
-    simulationmanager::setcurrentslowdown(doc.child("simulation").attribute("slowdown").as_int());
-
-    int mode = doc.child("simulation").attribute("mode").as_int();
-
-    simulationmanager::setcomputeshadervalue(shaderids::compute_gravity, 4, mode);
-
-    if (mode == 1)
+    if (result)
     {
-        simulationmanager::setcomputeshadervalue(shaderids::compute_gravity, 1, doc.child("simulation").attribute("veltransfer").as_int());
-        simulationmanager::setcomputeshadervalue(shaderids::compute_gravity, 2, doc.child("simulation").attribute("masstransfer").as_int());
+        current_name = doc.child("info").attribute("name").value();
+        current_desc = doc.child("info").attribute("description").value();
+        currentparticlenumber = doc.child("info").attribute("particles").as_int();
+
+        int loadversion = doc.child("info").attribute("version").as_int();
+
+
+        simulationmanager::setcurrentgravity(doc.child("simulation").attribute("gravity").as_int());
+        simulationmanager::setcurrentslowdown(doc.child("simulation").attribute("slowdown").as_int());
+
+        int mode = doc.child("simulation").attribute("mode").as_int();
+
+        simulationmanager::setcomputeshadervalue(shaderids::compute_gravity, 4, mode);
+
+        if (mode == 1)
+        {
+            simulationmanager::setcomputeshadervalue(shaderids::compute_gravity, 1, doc.child("simulation").attribute("veltransfer").as_int());
+            simulationmanager::setcomputeshadervalue(shaderids::compute_gravity, 2, doc.child("simulation").attribute("masstransfer").as_int());
+        }
+        if (mode != 0)
+        {
+            simulationmanager::setcomputeshadervalue(shaderids::compute_gravity, 3, doc.child("simulation").attribute("interactiondistance").as_int());
+        }
+
+        pugi::xml_node particledata = doc.child("particledata");
+
+        int i = 0;
+
+        if (loadversion == 56)
+        {
+            for (pugi::xml_node p = particledata.child("particle"); p; p = p.next_sibling("particle"))
+            {
+                obj_posmasses[i].x = p.attribute("posx").as_float();
+                obj_posmasses[i].y = p.attribute("posy").as_float();
+                obj_posmasses[i].z = p.attribute("posz").as_float();
+                obj_posmasses[i].a = p.attribute("mass").as_float();
+
+                obj_velocities[i].x = p.attribute("velx").as_float();
+                obj_velocities[i].y = p.attribute("vely").as_float();
+                obj_velocities[i].z = p.attribute("velz").as_float();
+                obj_velocities[i].a = p.attribute("rer").as_float();
+                i++;
+            }
+        }
+        else if (loadversion > 56)
+        {
+            for (pugi::xml_node p = particledata.child("p"); p; p = p.next_sibling("p"))
+            {
+                obj_posmasses[i].x = p.attribute("x").as_float();
+                obj_posmasses[i].y = p.attribute("y").as_float();
+                obj_posmasses[i].z = p.attribute("z").as_float();
+                obj_posmasses[i].a = p.attribute("m").as_float();
+
+                obj_velocities[i].x = p.attribute("vx").as_float();
+                obj_velocities[i].y = p.attribute("vy").as_float();
+                obj_velocities[i].z = p.attribute("vz").as_float();
+                obj_velocities[i].a = p.attribute("n").as_float();
+                i++;
+            }
+        }
     }
-    if (mode != 0)
+    else
     {
-        simulationmanager::setcomputeshadervalue(shaderids::compute_gravity, 3, doc.child("simulation").attribute("interactiondistance").as_int());
-    }
-
-    pugi::xml_node particledata = doc.child("particledata");
-
-    int i = 0;
-
-    for (pugi::xml_node p = particledata.child("particle"); p; p = p.next_sibling("particle"))
-    {
-            obj_posmasses[i].x = p.attribute("posx").as_float();
-            obj_posmasses[i].y = p.attribute("posy").as_float();
-            obj_posmasses[i].z = p.attribute("posz").as_float();
-            obj_posmasses[i].a = p.attribute("mass").as_float();
-
-            obj_velocities[i].x = p.attribute("velx").as_float();
-            obj_velocities[i].y = p.attribute("vely").as_float();
-            obj_velocities[i].z = p.attribute("velz").as_float();
-            obj_velocities[i].a = p.attribute("rer").as_float();
-            i++;
+        messagelogger::logmessage("systemmanager", result.description(), warningseverity::moderate);
     }
 
     return true;

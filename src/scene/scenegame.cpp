@@ -212,7 +212,7 @@ void scenegame::rendersidepanel()
     if (uielement::button("Reset camera", glm::vec2(9.0f, 2.0f))) cameracontroller::resetcamera();
 
     uielement::text("Add particles: ");
-    for (int a = 0; a < objgenerators.size(); a++)
+    for (uint32_t a = 0; a < objgenerators.size(); a++)
         if (uielement::button(objgenerators[a]->title, glm::vec2(12.0f, 2.0f))) showobjgenerator(a);
 
     uielement::text("Delete stuff:");

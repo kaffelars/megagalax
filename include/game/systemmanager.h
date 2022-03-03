@@ -26,7 +26,7 @@ namespace systemmanager
     const std::vector<particlegroup>& getparticlegroups();
     void deleteparticlegroup(uint32_t id);
     void deleteeverynparticles(int deletechance);
-    void deleteparticle(int id);
+    void deleteparticle(uint32_t id);
 
     void initialize();
 
@@ -36,10 +36,10 @@ namespace systemmanager
     bool save_system(std::string name, std::string description, std::string filename);
 
     void unpause();
-    void revertsystem(int fp);
-    void storesystem(int fp);
-    bool systemstored(int fp);
-    void deletestoragepoint(int fp);
+    void revertsystem(uint32_t fp);
+    void storesystem(int32_t fp);
+    bool systemstored(uint32_t fp);
+    void deletestoragepoint(uint32_t fp);
     int getstoragepointnumber();
 
     void download_current_obj_values();

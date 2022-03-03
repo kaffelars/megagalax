@@ -101,7 +101,7 @@ void scenesettings::video()
 
     uielement::text("Camera field of view (vertical): ");
     int fov = settings::getisetting(setting_enum::fov);
-    if (uielement::sliderint(30, 180, fov, 1));
+    if (uielement::sliderint(30, 180, fov, 1))
     {
         settings::setsetting(setting_enum::fov, fov);
         cameracontroller::updateprojection();
@@ -160,8 +160,6 @@ void scenesettings::video()
 
 void scenesettings::keybinds()
 {
-    float index = 0.0f;
-
     const std::vector<inputmanager::keydata>& keydata = inputmanager::getkeymap();
 
     uielement::begintable("keys table", 2);

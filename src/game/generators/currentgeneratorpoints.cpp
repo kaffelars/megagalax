@@ -57,7 +57,7 @@ void currentgeneratorpoints::updatevao(std::vector<glm::vec4>& points, std::vect
 
         lines.clearlines();
 
-        for (int a = 0; a < points.size(); a++)
+        for (uint32_t a = 0; a < points.size(); a++)
         {
             float linecolorstart = utils::packrgb(glm::vec3(0.1f, 0.3f, 0.1f));
             float linecolorend = utils::packrgb(glm::vec3(0.3f, 0.7f, 0.3f));
