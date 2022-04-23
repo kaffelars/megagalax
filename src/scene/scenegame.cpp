@@ -17,7 +17,7 @@ scenegame::scenegame()
 {
     //ctor
     currentobjgenerator = nullptr;
-    movementvelocity = 0.1f;
+    movementvelocity = 0.5f;
 }
 
 scenegame::~scenegame()

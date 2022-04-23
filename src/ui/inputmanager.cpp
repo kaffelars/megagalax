@@ -107,10 +107,10 @@ void inputmanager::processkey(key_type ktype, int32_t keypress, key_mods kmod, k
             key.clicked = true;
             if (!keypaused[k_id] && key.keyfunction[static_cast<uint32_t>(key_event::clicked)])
                 key.keyfunction[static_cast<uint32_t>(key_event::clicked)]();
-        }
-        heldkeys.push_back(k_id);
-        key.held = true;
 
+            heldkeys.push_back(k_id);
+            key.held = true;
+        }
     }
 
     if (kstatus == key_status::up)
